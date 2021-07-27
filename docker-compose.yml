@@ -1,0 +1,56 @@
+version: '3'
+networks:
+  main:
+
+services: 
+  proxy:
+    image: "traefik:v2.4"
+    container_name: "${PROXY_URL}"
+    ports:
+      - "${CONTAINERS_PORT}:${CONTAINERS_PORT}"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.http.address=:80"
+      - "--global.sendAnonymousUsage=false"
+
+  db:
+    container_name: "${DB_HOST}"
+    image: "postgres:12.4-alpine"
+    volumes:
+      - "./.data:/var/lib/postgresql/data:rw"
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    environment:
+      POSTGRES_DB: "${DB_NAME}"
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASS}"
+    restart: unless-stopped
+    labels:
+      traefik.enable: true
+      traefik.http.routers.pg-web.rules: Host(`${DB_HOST}`)
+      traefik.http.routers.pg-web.entrypoints: http
+
+  api:
+    container_name: "${API_URL}"
+    volumes:
+      - "./backend:/opt/app-root/src:rw"
+    ports:
+      - ${CONTAINERS_PORT}
+      - "9229:9229"
+    build:
+      context: ./backend
+      dockerfile: ./registry/development/Dockerfile
+    environment:
+      PORT: ${CONTAINERS_PORT}
+      APP_ENV: ${ENVIRONMENT}
+      NODE_ENV: ${ENVIRONMENT}
+    command: ['./wait-for-it.sh', '-t', '0', '${DB_HOST}:${DB_PORT}', '--', '.s2i/bin/assemble']
+    restart: unless-stopped
+    labels:
+      traefik.enable: true
+      traefik.http.routers.api-web.rule: Host(`${API_URL}`)
+      traefik.http.routers.api-web.entrypoints: http
