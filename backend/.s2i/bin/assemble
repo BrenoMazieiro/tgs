@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# If there is any error in the building process stop
+set -e
+# Move hidden files as well
+shopt -s dotglob
+
+# If there is package.json install dependencies
+if [ -f package.json ]; then
+  echo "### Found package.json, installing the dependencies..."
+  if [ $APP_ENV == 'development' ]; then
+    # I'm making sure we're in a development environment
+    yarn install --production=false
+  else
+    # I'm making sure we're in a production environment
+    yarn install --production=true
+  fi
+fi
+
+if [ $APP_ENV == 'development' ]; then
+  .s2i/bin/run
+else
+  echo "### Removing trash"
+  rm .cache/ .config/ -Rf
+  echo "### Build process success!"
+  .s2i/bin/run
+fi

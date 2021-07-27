@@ -3,7 +3,7 @@ import { schema } from '../../schemas/schema.js'
 
 const server = new Apollo.ApolloServer({
   schema,
-  context: ({req}) => {
+  context: ({ req }) => {
     const user = req.headers.user
     const teste = "Essa é minha variável de teste"
     return {
@@ -26,7 +26,7 @@ const server = new Apollo.ApolloServer({
 
 server.init = () => {
   server.listen(process.env.PORT || 3000, '0.0.0.0').then(() => {
-    console.log(`Server is listening on port 3000`)
+    console.log(`Server is listening on port ${process.env.PORT || 3000}`)
   })
 }
 
