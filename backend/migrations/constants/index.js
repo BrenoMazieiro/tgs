@@ -1,0 +1,5 @@
+export const uuidRoleSystem = '15c18aa9-199c-4d45-b35a-fbfa2e65f242'
+export const uuidRoleBOadmin = '15c18aa9-199c-4d45-b35a-fbfa2e65f243'
+export const uuidRoleRegular = '15c18aa9-199c-4d45-b35a-fbfa2e65f244'
+export const uuidUserSystem = '15c18aa9-199c-4d45-b35a-fbfa2e65f000'
+export const uuidUserMigration = '15c18aa9-199c-4d45-b35a-fbfa2e65f001'

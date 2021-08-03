@@ -48,6 +48,11 @@ services:
       PORT: ${CONTAINERS_PORT}
       APP_ENV: ${ENVIRONMENT}
       NODE_ENV: ${ENVIRONMENT}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
     command: ['./wait-for-it.sh', '-t', '0', '${DB_HOST}:${DB_PORT}', '--', '.s2i/bin/assemble']
     restart: unless-stopped
     labels:

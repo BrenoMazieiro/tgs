@@ -12,7 +12,9 @@
   "dependencies": {
     "apollo-server": "^3.0.2",
     "graphql": "^15.5.1",
-    "graphql-tools": "^7.0.5"
+    "graphql-tools": "^7.0.5",
+    "knex": "^0.95.9",
+    "pg": "^8.7.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
