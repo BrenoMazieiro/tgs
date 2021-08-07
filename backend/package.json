@@ -14,6 +14,7 @@
     "graphql": "^15.5.1",
     "graphql-tools": "^7.0.5",
     "knex": "^0.95.9",
+    "knexnest": "^1.0.0",
     "pg": "^8.7.1"
   },
   "devDependencies": {

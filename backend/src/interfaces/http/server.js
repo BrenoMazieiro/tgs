@@ -1,14 +1,12 @@
 import Apollo from 'apollo-server'
 import { schema } from '../../schemas/schema.js'
+import { shared } from '../../shared/index.js'
 
 const server = new Apollo.ApolloServer({
   schema,
   context: ({ req }) => {
-    const user = req.headers.user
-    const teste = "Essa é minha variável de teste"
     return {
-      user,
-      teste
+      ...shared
     }
   },
   formatError: (error) => {

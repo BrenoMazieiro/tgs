@@ -1,16 +1,19 @@
-import { BooksDomain, BooksMutations, BooksQueries } from './Books/Domain/index.js'
+import { UserDomain, UserChains, UserQueries, UserMutations, UserInputs } from './Users/Domain/User.js'
 
 const typeDefs = `#graphql
 
-  ${BooksDomain}
+  ${UserDomain}
+  ${UserChains}
 
   type Query {
-    ${BooksQueries}
+    ${UserQueries}
   }
 
   type Mutation {
-    ${BooksMutations}
+    ${UserMutations}
   }
+  
+  ${UserInputs}
 
 `
 
