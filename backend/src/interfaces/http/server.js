@@ -4,12 +4,11 @@ import { shared } from '../../shared/index.js'
 
 const server = new Apollo.ApolloServer({
   schema,
-  context: ({ req }) => {
-    return {
-      ...shared
-    }
-  },
+  context: () => ({
+    ...shared,
+  }),
   formatError: (error) => {
+    // eslint-disable-next-line no-param-reassign
     delete error.extensions.exception.stacktrace
     const errorlog = {
       message: error.message,
@@ -24,6 +23,7 @@ const server = new Apollo.ApolloServer({
 
 server.init = () => {
   server.listen(process.env.PORT || 3000, '0.0.0.0').then(() => {
+    // eslint-disable-next-line no-console
     console.log(`Server is listening on port ${process.env.PORT || 3000}`)
   })
 }

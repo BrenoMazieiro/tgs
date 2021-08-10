@@ -11,13 +11,11 @@ const readRolesById = (ctx, id) => {
 
   return (
     ctx.db.knexnest(sql)
-      .then(result => {
-        return result[0] || null
-      })
-      .catch(error => {
+      .then((result) => result[0] || null)
+      .catch((error) => {
         const errorObj = {
           msg: error.message,
-          hint: error.hint
+          hint: error.hint,
         }
         ctx.core.errorHandling('readRolesById: There was an error in the database', 'database_error', errorObj)
       })

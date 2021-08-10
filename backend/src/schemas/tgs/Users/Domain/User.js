@@ -24,12 +24,14 @@ export const UserChains = `#graphql
     description: String
   }
 `
+
 export const UserQueries = `#graphql
   Users(
     id: ID
     deleted: Boolean
   ): [User!]!
 `
+
 export const UserMutations = `#graphql
   MergeUser(
     id: ID

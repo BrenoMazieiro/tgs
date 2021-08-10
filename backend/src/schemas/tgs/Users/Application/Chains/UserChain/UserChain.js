@@ -1,4 +1,4 @@
-import { readRolesById } from "../../../Infrastructure/readRolesById.js"
+import { readRolesById } from '../../../Infrastructure/readRolesById.js'
 
 export const UserChain = {
   name: (parent) => `${parent.name} XXX`,

@@ -5,8 +5,8 @@ const shared = {
   core,
   db: {
     knex,
-    knexnest
-  }
+    knexnest,
+  },
 }
 
 export { shared }

@@ -1,4 +1,6 @@
-import { UserDomain, UserChains, UserQueries, UserMutations, UserInputs } from './Users/Domain/User.js'
+import {
+  UserDomain, UserChains, UserQueries, UserMutations, UserInputs,
+} from './Users/Domain/User.js'
 
 const typeDefs = `#graphql
 

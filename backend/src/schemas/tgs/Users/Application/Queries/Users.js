@@ -1,10 +1,5 @@
-import readUsers from "../../Infrastructure/readUsers.js"
+import readUsers from '../../Infrastructure/readUsers.js'
 
-const Users = (_, params, ctx) => {
-  // authorize
-  // validate
-  // business logic
-  return readUsers(ctx, params)
-}
+const Users = (_, params, ctx) => readUsers(ctx, params)
 
 export default Users
