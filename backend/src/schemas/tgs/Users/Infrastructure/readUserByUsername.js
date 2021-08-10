@@ -1,4 +1,4 @@
-const readUsers = (ctx, { id, deleted }) => {
+const readUserByUsername = (ctx, username) => {
   const sql = (
     ctx.db.knex('users as u')
       .select(
@@ -10,28 +10,20 @@ const readUsers = (ctx, { id, deleted }) => {
         'u.role_id as _roleId',
         'u.deleted_at as _isDeleted',
       )
-      .whereNotIn('u.username', ['system', 'migration'])
+      .where('u.username', '=', username)
   )
-
-  if (id) {
-    sql.where('u.id', '=', id)
-  }
-
-  if (!deleted) {
-    sql.whereNull('u.deleted_at')
-  }
 
   return (
     ctx.db.knexnest(sql)
-      .then((result) => result || [])
+      .then((result) => result[0] || [])
       .catch((error) => {
         const errorObj = {
           msg: error.message,
           hint: error.hint,
         }
-        ctx.core.errorHandling('readUser: There was an error in the database', 'database_error', errorObj)
+        ctx.core.errorHandling('readUserByUsername: There was an error in the database', 'database_error', errorObj)
       })
   )
 }
 
-export default readUsers
+export default readUserByUsername

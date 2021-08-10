@@ -8,6 +8,10 @@ export const UserDomain = `#graphql
     isDeleted: Boolean
     role: Role
   }
+  enum DeleteEnum {
+    soft
+    hard
+  }
 `
 
 export const UserChains = `#graphql
@@ -35,9 +39,9 @@ export const UserQueries = `#graphql
 export const UserMutations = `#graphql
   MergeUser(
     id: ID
-    deleteIt: Boolean
+    deleteIt: DeleteEnum
     userData: UserData
-  ) : [User]
+  ) : [User!]!
 `
 
 export const UserInputs = `#graphql
