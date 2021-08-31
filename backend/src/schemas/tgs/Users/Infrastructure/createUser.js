@@ -1,3 +1,4 @@
+import addUserToEmailQueue from './addUserToEmailQueue.js'
 import readRoleByCode from './readRoleByCode.js'
 import readUserByUsername from './readUserByUsername.js'
 import readUsers from './readUsers.js'
@@ -11,6 +12,7 @@ const createUser = async (ctx, userData) => {
     email,
     username,
     password,
+    approvalToken,
   } = userData
   return (
     ctx.db
@@ -21,7 +23,7 @@ const createUser = async (ctx, userData) => {
         email,
         username,
         password: ctx.core.encrypt.strong.encrypt(password),
-        approval_token: user.approvalToken,
+        approval_token: approvalToken,
         role_id: role.id,
         created_by: user.id,
         updated_by: user.id,
@@ -30,6 +32,7 @@ const createUser = async (ctx, userData) => {
         if (!result.length) {
           return []
         }
+        addUserToEmailQueue(ctx, result[0], 'approval_token')
         return readUsers(ctx, { id: result[0] })
       })
       .catch((error) => {

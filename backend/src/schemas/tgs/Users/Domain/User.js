@@ -52,6 +52,14 @@ export const UserMutations = `#graphql
     username: String!
     password: String!
   ) : UserAuth
+
+  RefreshUserToken (
+    refreshToken: String!
+  ) : UserAuth
+
+  ValidateUser (
+    approvalToken: String!
+  ) : UserAuth
 `
 
 export const UserInputs = `#graphql

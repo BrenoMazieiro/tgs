@@ -1,4 +1,4 @@
-const { onUpdateTrigger } = require('./triggers')
+const { onUpdateTrigger } = require('./triggers/index.js')
 
 exports.up = (knex) => knex.schema.createTable('queueemails', (table) => {
   table.uuid('id').unique().primary().notNullable()
