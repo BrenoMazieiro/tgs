@@ -17,6 +17,9 @@ if [ -f package.json ]; then
   fi
 fi
 
+echo "### Runing migrations"
+knex migrate:latest --knexfile knexfile.cjs --esm
+
 if [ $APP_ENV == 'development' ]; then
   .s2i/bin/run
 else

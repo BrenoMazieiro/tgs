@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "apollo-server": "^3.0.2",
+    "bcrypt": "^5.0.1",
     "graphql": "^15.5.1",
     "graphql-tools": "^7.0.5",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.9",
     "knexnest": "^1.0.0",
     "pg": "^8.7.1"

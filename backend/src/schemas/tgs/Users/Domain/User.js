@@ -12,6 +12,11 @@ export const UserDomain = `#graphql
     soft
     hard
   }
+
+  type UserAuth {
+    token: String!
+    refreshToken: String!
+  }
 `
 
 export const UserChains = `#graphql
@@ -42,6 +47,11 @@ export const UserMutations = `#graphql
     deleteIt: DeleteEnum
     userData: UserData
   ) : [User!]!
+
+  UserSignin(
+    username: String!
+    password: String!
+  ) : UserAuth
 `
 
 export const UserInputs = `#graphql

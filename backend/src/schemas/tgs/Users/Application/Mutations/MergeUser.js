@@ -13,7 +13,8 @@ const MergeUser = (_, { id, deleteIt, userData }, ctx) => {
 
     // authorization
     // validate userData
-    return createUser(ctx, userData)
+    const approvalToken = ctx.core.encrypt.weak.encrypt(userData.email)
+    return createUser(ctx, { ...userData, approvalToken })
   }
 
   if (id) {
