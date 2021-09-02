@@ -16,7 +16,7 @@ const updateUser = async (ctx, userId, userData) => {
         picture,
         email,
         username,
-        password,
+        password: ctx.core.encrypt.strong.encrypt(password),
         updated_by: userId,
       }, 'id')
       .where('u.id', '=', userId)

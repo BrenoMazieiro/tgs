@@ -1,3 +1,7 @@
 export * from './errorHandling.js'
 export * from './encrypt.js'
 export * from './createToken.js'
+export * from './checkToken.js'
+export * from './tokenVerifier.js'
+export * from './authorization.js'
+export * from './validation.js'

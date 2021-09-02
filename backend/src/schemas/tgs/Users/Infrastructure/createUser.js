@@ -5,7 +5,7 @@ import readUsers from './readUsers.js'
 
 const createUser = async (ctx, userData) => {
   const user = await readUserByUsername(ctx, 'system')
-  const role = await readRoleByCode(ctx, 'SYSTEM')
+  const role = await readRoleByCode(ctx, 'REGULAR')
   const {
     name,
     picture,

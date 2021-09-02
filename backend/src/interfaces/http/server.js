@@ -4,16 +4,26 @@ import { shared } from '../../shared/index.js'
 
 const server = new Apollo.ApolloServer({
   schema,
-  context: () => ({
-    ...shared,
-  }),
+  context: ({ req, connection }) => {
+    const token = shared.core.checkToken(req, connection)
+    const user = shared.core.tokenVerifier(token)
+    return ({
+      ...shared,
+      user,
+    })
+  },
   formatError: (error) => {
     // eslint-disable-next-line no-param-reassign
     delete error.extensions.exception.stacktrace
+    // eslint-disable-next-line no-param-reassign
+    delete error.extensions.exception
+    const { code } = error.extensions
+    // eslint-disable-next-line no-param-reassign
+    delete error.extensions.code
     const errorlog = {
       message: error.message,
-      code: error.extensions.code,
-      detail: error.extensions.exception ? error.extensions.exception : null,
+      code,
+      detail: error.extensions ? error.extensions : null,
       path: error.path ? error.path[0] : null,
     }
     return errorlog

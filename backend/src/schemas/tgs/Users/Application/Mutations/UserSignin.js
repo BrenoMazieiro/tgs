@@ -27,15 +27,15 @@ const UserSignin = async (_, { username, password }, ctx) => {
           userData: {
             id: user.id,
             isValid: !user.approvalToken,
-            permission: (
+            permissions: (
               user.permissions
                 ? user.permissions.flat().map((permission) => permission.code)
                 : []
             ),
-            sub: user.id,
-            iss: process.env.JWT_ISS || 'nodejsAPI',
-            aud: process.env.JWT_AUD || 'theGodStack',
           },
+          sub: user.id,
+          iss: process.env.JWT_ISS || 'nodejsAPI',
+          aud: process.env.JWT_AUD || 'theGodStack',
         },
       )
     ),
