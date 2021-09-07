@@ -34,7 +34,7 @@ const server = new Apollo.ApolloServer({
 server.init = () => {
   server.listen(process.env.PORT || 3000, '0.0.0.0').then(() => {
     // eslint-disable-next-line no-console
-    console.log(`Server is listening on port ${process.env.PORT || 3000}`)
+    console.log('\x1b[36m%s\x1b[0m', `[${new Date()}] 🚀 INFO: Server is listening on port ${process.env.PORT || 3000}`)
   })
 }
 
